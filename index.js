@@ -12,7 +12,13 @@ var mongoose = require('mongoose');
 // Look for static files in /public
 app.use(express.static(__dirname + '/public'));
 
+// Mongoose
 mongoose.connect("mongodb://127.0.0.1:27017/clash-drawer");
+
+// Variables
+// -----------------------------------
+var numUsers = 0;
+
 
 // SCHEMAS
 // -----------------------------------
@@ -40,7 +46,7 @@ app.all('*', function(req, res, next) {
 
 // ROUTES
 // -----------------------------------
-
+//
 // Root directory
 app.get('/', function(req, res) {
     res.sendFile('index.html');
@@ -57,23 +63,48 @@ app.get('/claninfo', function(req, res) {
     res.sendFile('members.json');
 });
 
+app.get('/active_chatters', function(req, res) {
+    res.json({numUsers: numUsers});
+});
 
-
+// SOCKETS
+// -----------------------------------
+//
 // a conncetion has been established
 io.on('connection', function(socket) {
-
     console.log('a user connected');
 
+    var addedUser = false;
 
+    socket.on('add user', function(user) {
+        if(addedUser) return;
+
+        socket.user = user;
+        ++numUsers;
+
+        addedUser = true;
+        socket.emit('user joined', {
+            user: socket.user,
+            numUsers: numUsers
+        });
+
+    });
 
     // a user has disconnected
     socket.on('disconnect', function() {
         console.log('user disconnected');
+        // if(addedUser) {
+        //     --numUsers;
+        //
+        //     socket.broadcast.emit('user has left', {
+        //         user: socket.user,
+        //         numUsers: numUsers
+        //     });
+        // }
     });
 
     // New Chat Message Received
     socket.on('chat message', function(msg) {
-
         var chat = {
             created: new Date(),
             content: msg,
