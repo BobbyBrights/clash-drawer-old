@@ -158,12 +158,12 @@ html {}
     background: white;
 }
 #messages {
-    overflow-y: scroll;
+    overflow-y: auto;
      -webkit-overflow-scrolling: touch;
 }
 
 .clan-info {
-    overflow-y: scroll;
+    overflow-y: auto;
      -webkit-overflow-scrolling: touch;
 }
 .clan-logo {
