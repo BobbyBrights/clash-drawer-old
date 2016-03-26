@@ -176,20 +176,18 @@ html {}
     color: black;
     margin-bottom: 10px;
 }
-.clan-info dl {
+.clan-info table {
     text-align: left;
     width: 100%;
 }
-.clan-info dt {
+.clan-info .dt {
     font-weight: bold;
-    float: left;
-    clear: left;
     width: 50%;
     text-align: right;
     padding-right: 10px;
     margin-bottom: 10px;
 }
-.clan-info dd {
+.clan-info .dd {
     margin-left: 50%;
     width: 50%;
     padding-left: 10px;

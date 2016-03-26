@@ -28,18 +28,28 @@
             <div class="clan-info">
                 <img src="/images/logo.png" class="clan-logo" alt="">
                 <h2 class="clan-name">Legacy-Clan</h2>
-                <dl>
-                    <dt>Tag:</dt>
-                    <dd id="clan-tag"></dd>
-                    <dt>Members:</dt>
-                    <dd id="clan-members-count"></dd>
-                    <dt>Required Trophies:</dt>
-                    <dd id="clan-required-trophies"></dd>
-                    <dt>War Wins:</dt>
-                    <dd id="clan-war-wins"></dd>
-                    <dt>War Win Streak:</dt>
-                    <dd id="clan-war-win-streak"></dd>
-                </dl>
+                <table>
+                    <tr>
+                        <td class="dt">Tag:</td>
+                        <td id="clan-tag" class="dd"></td>
+                    </tr>
+                    <tr>
+                        <td class="dt">Members:</td>
+                        <td id="clan-members-count" class="dd"></td>
+                    </tr>
+                    <tr>
+                        <td class="dt">Required Tropies:</td>
+                        <td id="clan-required-trophies" class="dd"></td>
+                    </tr>
+                    <tr>
+                        <td class="dt">War Wins:</td>
+                        <td id="clan-war-wins" class="dd"></td>
+                    </tr>
+                    <tr>
+                        <td class="dt">War Win Streak:</td>
+                        <td id="clan-war-win-streak" class="dd"></td>
+                    </tr>
+                </table>
 
                 <div id="clan-members-list"></div>
 
@@ -107,11 +117,12 @@
 
 
         function updateMessageContainerHeight() {
-            $('#messages').height(($(window).height() - $('nav').height() - $('.text-bar').height() - $('.column-header').height() ));
-            $('.clan-info').height(($(window).height() - $('nav').height()  - $('.column-header').height() - 1));
-            $('.column-1, .column-3').height(($(window).height() - $('nav').height()  - $('.column-header').height() + $('.text-bar').height() - 13));
+            $('#messages').height(($(window).height() - $('nav').height() - $('.text-bar').height() - $('.column-header').height()));
+            $('.clan-info').height(($(window).height() - $('nav').height() - $('.column-header').height() - 1));
+            $('.column-1, .column-3').height(($(window).height() - $('nav').height() - $('.column-header').height() + $('.text-bar').height() - 13));
 
-            $('#messages').scrollTop($('#messages').prop("scrollHeight"));        }
+            $('#messages').scrollTop($('#messages').prop("scrollHeight"));
+        }
 
         $('form').submit(function() {
             socket.emit('chat message', $('#m').val());
