@@ -53,6 +53,10 @@ app.get('/msg/all', function(req, res) {
     });
 });
 
+app.get('/claninfo', function(req, res) {
+    res.sendFile('members.json');
+});
+
 
 
 // a conncetion has been established

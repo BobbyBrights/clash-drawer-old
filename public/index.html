@@ -9,27 +9,59 @@
 
 <body>
     <nav class="navbar navbar-default">
-      <div class="container-fluid">
+        <div class="container-fluid">
             <div class="col-md-6 col-md-offset-3">
-                 <h1 class="navbar-brand">clash drawer</h1>
+                <h1 class="navbar-brand">clash drawer</h1>
             </div>
-      </div>
+        </div>
     </nav>
 
-    <div class="container-fluid">
+    <div class="container-fluid padding-0">
         <div class="col-xs-3 column-1">
-                TEAM
+            <div class="column-header">
+                <h3>Clan</h3>
+            </div>
+            <div class="clan-info">
+                <img src="/images/logo.png" class="clan-logo" alt="">
+                <h2 class="clan-name">Legacy-Clan</h2>
+                <dl>
+                    <dt>Tag:</dt>
+                    <dd id="clan-tag"></dd>
+                    <dt>Members:</dt>
+                    <dd id="clan-members-count"></dd>
+                    <dt>Required Trophies:</dt>
+                    <dd id="clan-required-trophies"></dd>
+                    <dt>War Wins:</dt>
+                    <dd id="clan-war-wins"></dd>
+                    <dt>War Win Streak:</dt>
+                    <dd id="clan-war-win-streak"></dd>
+                </dl>
+
+                <div id="clan-members-list"></div>
+
+
+
+            </div>
+
         </div>
         <div class="col-xs-6 column-2 main-chat">
+            <div class="column-header">
+                <h3>Chat</h3>
+            </div>
             <ul id="messages"></ul>
 
-            <form action="">
-                <input id="m" autocomplete="off" placeholder="Your message" />
-            </form>
-
+            <div class="container text-bar">
+                <div class="col-md-12">
+                    <form action="">
+                        <input id="m" autocomplete="off" placeholder="Your message" />
+                    </form>
+                </div>
+            </div>
         </div>
         <div class="col-xs-3 column-1">
-            Attack Plan
+            <div class="column-header">
+                <h3>Attack Plan</h3>
+            </div>
         </div>
     </div>
 
@@ -38,13 +70,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js"></script>
     <script>
         var socket = io();
+        var clanInfo = '';
 
         $(function() {
+            // Fill
             $.getJSON("/msg/all", function(msgs) {
-                $.each(msgs, function(i,msg) {
-                    $('#messages').append($('<li>').text(msg.username + ": " +msg.content));
+                $.each(msgs, function(i, msg) {
+                    $('#messages').append($('<li>').text(msg.username + ": " + msg.content));
                 });
             });
+
+            $.getJSON("/members.json", function(clan) {
+                console.log(clan.tag);
+                $('#clan-tag').html(clan.tag);
+                $('#clan-members-count').html(clan.members + "/50");
+                $('#clan-required-trophies').html(clan.requiredTrophies);
+                $('#clan-war-wins').html(clan.warWins);
+                $('#clan-war-win-streak').html(clan.warWinStreak);
+
+                $.each(clan.memberList, function(i, member) {
+                    $('#clan-members-list').append($('<span class="label label-default">').text(member.name));
+                });
+            });
+
+
+
+
         });
 
         $('form').submit(function() {

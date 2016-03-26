@@ -62,15 +62,19 @@
   font-family: "CamphorStd" !important; }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  form { background: #192533; padding: 3px; bottom: 0; width: 100%; }
-  form input { border: 0; padding: 2%; width: 100%; border-radius: 2px; outline: none; }
+  form {bottom:0;  width: 100%; padding: 0 10px;}
+  form input { border: 0; width:inherit; outline: none; height: 50px;  }
 
 
   #messages { list-style-type: none; margin: 0; padding: 0; }
-  #messages li { padding: 5px 10px; }
+  #messages li { padding: 10px 10px; }
   #messages li:nth-child(odd) { background: #eee; }
 
 html {
+}
+
+.padding-0 {
+    padding: 0;
 }
 
   .navbar {
@@ -90,10 +94,10 @@ html {
 
     .column-1, .column-2, .column-3 {
         height: 100vh;
+        padding: 0;
     }
 
     .column-1, .column-3 {
-        padding-top: 30px;
     }
 
     .column-2 {
@@ -106,3 +110,57 @@ html {
         background: white;
         padding: 0;
     }
+
+    .column-header {
+        height:40px;
+        border-bottom: 1px solid #bbb;
+        color: #666;
+        line-height: 40px;
+        padding-left: 15px;
+
+    }
+
+    .column-header h3 {
+        font-weight: 400;
+
+    }
+    .text-bar {
+        position: fixed;
+        bottom: 0;
+        width: inherit;
+        padding:0;
+    }
+
+    .text-bar > div.col-md-12 {
+        padding: 0;
+        border-top: 1px solid #bbb;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    // CLAN INFO
+    .clan-info {}
+    .clan-logo { width: 30%; margin-left: 35%; padding-top: 30px; }
+    .clan-name { text-align: center; color: black; margin-bottom:10px;}
+    .clan-info dl { text-align: left; width: 100%; }
+    .clan-info dt { font-weight: bold; float: left; clear:left; width: 50%; text-align: right; padding-right: 10px; margin-bottom: 10px;  }
+    .clan-info dd { margin-left: 50%; width: 50%; padding-left:  10px; margin-bottom: 10px; }
+
+    #clan-members-list {
+        padding: 10px 10%;
+    }
+    #clan-members-list span {
+        line-height:1.5em;
+        float:left;
+        display:inline;
+        margin: 2px;
+        padding: 0.2em .6em .1em .6em;
+        }
