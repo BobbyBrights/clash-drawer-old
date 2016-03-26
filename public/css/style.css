@@ -71,6 +71,7 @@
   #messages li:nth-child(odd) { background: #eee; }
 
 html {
+    overflow: hidden;
 }
 
 .padding-0 {
@@ -93,17 +94,23 @@ html {
   }
 
     .column-1, .column-2, .column-3 {
-        height: 100vh;
+        min-height: 100vh;
         padding: 0;
     }
 
     .column-1, .column-3 {
     }
 
-    .column-2 {
+    .column-1 {
         border-right: 1px solid #bbb;
-        border-left: 1px solid #bbb;
+    }
+
+    .column-2 {
         position: relative;
+    }
+
+    .column-3 {
+        border-left: 1px solid #bbb;
     }
 
     .main-chat {
@@ -134,12 +141,16 @@ html {
     .text-bar > div.col-md-12 {
         padding: 0;
         border-top: 1px solid #bbb;
+        background: white;
     }
 
 
 
 
 
+    #messages {
+        overflow-y: scroll;
+    }
 
 
 

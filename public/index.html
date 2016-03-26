@@ -58,7 +58,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-3 column-1">
+        <div class="col-xs-3 column-3">
             <div class="column-header">
                 <h3>Attack Plan</h3>
             </div>
@@ -74,6 +74,12 @@
 
         $(function() {
             // Fill
+            updateMessageContainerHeight();
+
+            $(window).resize(function() {
+                updateMessageContainerHeight();
+            });
+
             $.getJSON("/msg/all", function(msgs) {
                 $.each(msgs, function(i, msg) {
                     $('#messages').append($('<li>').text(msg.username + ": " + msg.content));
@@ -96,7 +102,12 @@
 
 
 
+
         });
+
+        function updateMessageContainerHeight() {
+            $('#messages').height(($(window).height() - $('nav').height() - $('.text-bar').height() ));
+        }
 
         $('form').submit(function() {
             socket.emit('chat message', $('#m').val());
