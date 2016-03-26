@@ -129,7 +129,7 @@ function populateClanInfo() {
  * column heights
  */
 function updateColumnAndMessagesDimensions() {
-    $('#messages').height(($(window).height() - $('nav').height() - $('.message-input').height() - $('.column-header').height()));
+    $('#messages').height(($(window).height() - $('nav').height() - $('.message-input').height() - $('.column-header').height() - 20));
     $('.clan-info').height(($(window).height() - $('nav').height() - $('.column-header').height() - 1));
     $('.column-1, .column-3').height(($(window).height() - $('nav').height() - $('.column-header').height() + $('.message-input').height() - 13));
     scrollToBottomOfMessages();
