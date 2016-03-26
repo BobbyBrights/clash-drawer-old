@@ -82,7 +82,7 @@ io.on('connection', function(socket) {
 
         new Chat(chat).save();
 
-        io.emit('chat message', msg);
+        io.emit('chat message', chat);
     });
 });
 

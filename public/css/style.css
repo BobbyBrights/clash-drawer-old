@@ -165,11 +165,28 @@ html {
 
     #clan-members-list {
         padding: 10px 10%;
+        text-align: center;
     }
     #clan-members-list span {
         line-height:1.5em;
-        float:left;
-        display:inline;
+        display:inline-block;
         margin: 2px;
         padding: 0.2em .6em .1em .6em;
-        }
+    }
+
+    #clan-members-list span img {
+        max-height: 30px;
+        padding-right:5px;
+    }
+
+    .id29000016, .id29000017, .id29000016 { background: #B2321F; }
+    .id29000015, .id29000014, .id29000013 { background: #191B1B; }
+    .id29000012, .id29000011, .id29000010 { background: #6C1DE1; }
+    .id29000009, .id29000008, .id29000007 { background: #D19635; }
+    .id29000006, .id29000005, .id29000004 { background: #707882; }
+
+    .id29000000 {
+        -webkit-box-shadow:inset 0px 0px 30px 2px #999;
+-moz-box-shadow:inset 0px 0px 30px 2px #999;
+box-shadow:inset 0px 0px 30px 2px #999;
+ color: black; }

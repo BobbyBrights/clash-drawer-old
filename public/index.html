@@ -68,6 +68,7 @@
 
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js"></script>
+
     <script>
         var socket = io();
         var clanInfo = '';
@@ -95,14 +96,9 @@
                 $('#clan-war-win-streak').html(clan.warWinStreak);
 
                 $.each(clan.memberList, function(i, member) {
-                    $('#clan-members-list').append($('<span class="label label-default">').text(member.name));
+                    $('#clan-members-list').append('<span class="label id' + member.league.id + '"><img src="' + member.league.iconUrls.tiny + '">' + member.name);
                 });
             });
-
-
-
-
-
         });
 
         function updateMessageContainerHeight() {
@@ -116,8 +112,10 @@
             $('#m').val('');
             return false;
         });
+
         socket.on('chat message', function(msg) {
-            $('#messages').append($('<li>').text(msg));
+            console.log(msg);
+            $('#messages').append($('<li>').text(msg.username + ": " + msg.content));
             updateMessageContainerHeight();
         });
     </script>
