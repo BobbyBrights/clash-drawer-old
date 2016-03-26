@@ -81,10 +81,6 @@
             // Fill
             updateMessageContainerHeight();
 
-            document.ontouchmove = function(event){
-                event.preventDefault();
-            }
-
             $(window).resize(function() {
                 updateMessageContainerHeight();
             });
