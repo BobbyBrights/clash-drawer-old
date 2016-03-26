@@ -71,7 +71,6 @@
   #messages li:nth-child(odd) { background: #eee; }
 
 html {
-    overflow: hidden;
 }
 
 .padding-0 {
@@ -94,7 +93,6 @@ html {
   }
 
     .column-1, .column-2, .column-3 {
-        min-height: 100vh;
         padding: 0;
     }
 

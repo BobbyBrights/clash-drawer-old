@@ -84,10 +84,10 @@
                 $.each(msgs, function(i, msg) {
                     $('#messages').append($('<li>').text(msg.username + ": " + msg.content));
                 });
+                updateMessageContainerHeight();
             });
 
             $.getJSON("/members.json", function(clan) {
-                console.log(clan.tag);
                 $('#clan-tag').html(clan.tag);
                 $('#clan-members-count').html(clan.members + "/50");
                 $('#clan-required-trophies').html(clan.requiredTrophies);
@@ -106,8 +106,10 @@
         });
 
         function updateMessageContainerHeight() {
-            $('#messages').height(($(window).height() - $('nav').height() - $('.text-bar').height() ));
-        }
+            $('#messages').height(($(window).height() - $('nav').height() - $('.text-bar').height() - $('.column-header').height() ));
+            $('.column-1, .column-3').height(($(window).height() - $('nav').height()  - $('.column-header').height() + $('.text-bar').height() - 13));
+
+            $('#messages').scrollTop($('#messages').prop("scrollHeight"));        }
 
         $('form').submit(function() {
             socket.emit('chat message', $('#m').val());
@@ -116,6 +118,7 @@
         });
         socket.on('chat message', function(msg) {
             $('#messages').append($('<li>').text(msg));
+            updateMessageContainerHeight();
         });
     </script>
 </body>
