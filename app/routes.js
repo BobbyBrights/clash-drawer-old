@@ -15,7 +15,7 @@ module.exports = function(app, passport) {
 
     app.get('/chat', isLoggedIn, function(req, res) {
         res.render('chat.ejs', {
-            user : req.user // get the user out of session and pass to template
+            user : req.user
         });
     });
 

@@ -1,6 +1,5 @@
 var socket = io();
 var clanInfo = '';
-var connected;
 
 $(function() {
     // On page load update the dimensions.
@@ -22,13 +21,16 @@ $(function() {
 // -----------------------------------
 
 socket.on('user joined', function (data) {
-    updateLoggedInCount();
-  // Display the welcome message
+    console.log('received user joined notification');
+    $.get('/activeUsers/add', function() {
+        updateLoggedInCount();
+    });
 });
 
-socket.on('user has left', function (data) {
-  updateLoggedInCount();
-  // Display the welcome message
+socket.on('user left', function (data) {
+    $.get('/activeUsers/remove', function() {
+        updateLoggedInCount();
+    });
 });
 
 
@@ -53,10 +55,12 @@ function styleMessages() {
 }
 
 function updateLoggedInCount() {
-    $.getJSON("/active_chatters", function(users) {
-        $('.active-count').html(users.numUsers);
+    $.getJSON("/activeUsers", function(users) {
+        $('.active-count').html(users.activeUsers.length);
     });
 }
+
+
 
 /**
  * Takes a message object and returns a string for the message-item
@@ -70,7 +74,7 @@ function makeMessageTemplate(message) {
                                     '<i class="message-user-status online"></i>'+
                                     message.content +
                                 '</span>' +
-                                '<span class="message-date  col-xs-2">' + moment(message.created).fromNow() + '</span>' +
+                                '<span class="message-date  col-xs-2" data-livestamp="'+message.created+'" title="' + moment(message.created).calendar() + '" ></span>' +
                             '</div>' +
                         '</li>';
 

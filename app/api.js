@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Chat = require('./models/chat.js');
-
+var _ = require('underscore');
 
 var activeUsers = [];
 
@@ -12,19 +12,33 @@ module.exports = function(app, passport) {
         });
     });
 
-    app.get('activeUsers/add', function(req, res) {
-        if(activeUsers.indexOf(req.user.username) > 0){
-            activeUsers.push(req.user.username);
+    app.get('/activeUser', function(req, res) {
+        if (req.user === undefined){
+            res.json({});
+        } else {
+            res.json({
+                user: req.user
+            });
         }
-        return;
     });
 
-    app.get('activeUsers/remove', function(req, res) {
+    app.get('/activeUsers', function(req, res) {
+        res.json({activeUsers: _.uniq(activeUsers)});
+    });
+
+    app.get('/activeUsers/add', function(req, res) {
+        activeUsers.push(req.user.username);
+        res.json({activeUsers: _.uniq(activeUsers)});
+    });
+
+    app.get('/activeUsers/remove', function(req, res) {
         if(activeUsers.indexOf(req.user.username) > 0){
             activeUsers.splice(activeUsers.indexOf(req.user.username), 1);
         }
-        return;
     });
 
 
+
 };
+
+exports.activeUsers = activeUsers;
