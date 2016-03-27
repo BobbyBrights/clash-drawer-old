@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Chat = require('./models/chat.js');
+var User = require('./models/user.js');
 var _ = require('underscore');
 
 var activeUsers = [];
@@ -35,6 +36,24 @@ module.exports = function(app, passport) {
         if(activeUsers.indexOf(req.user.username) > 0){
             activeUsers.splice(activeUsers.indexOf(req.user.username), 1);
         }
+    });
+
+    app.get('/user/:username/connected', function(req,res){
+        var username = req.params.username;
+        User.findOne({username : username}, function(err, user){
+            user.connected = true;
+            user.save();
+        });
+
+        return 'done';
+    });
+
+    app.get('/user/:username/disconnected', function(req,res){
+        var username = req.params.username;
+        User.findOne({username : username}, function(err, user){
+            user.connected = false;
+            user.save();
+        });
     });
 
     app.get('/refresh', function(req, res) {
