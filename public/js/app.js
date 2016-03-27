@@ -85,12 +85,12 @@ function makeMessageTemplate(message) {
     if (previousMessage.attr('data-author') !== message.username){
         var messageString = '<li class="message-item last-message-item" id="'+message._id+'" data-author="'+message.username.replace(/\s+/g, '')+'">' +
                                 '<div class="container">' +
-                                    '<span class="message-user col-xs-1">' + message.username.replace(/\s+/g, '') + '</span>' +
-                                    '<span class="message-content col-xs-9">' +
+                                    '<span class="message-user col-xs-2 col-md-1">' + message.username.replace(/\s+/g, '') + '</span>' +
+                                    '<span class="message-content col-xs-8 col-md-9">' +
                                         '<!--<i class="message-user-status online"></i>-->'+
                                         message.content +
                                     '</span>' +
-                                    '<span class="message-date  col-xs-2" data-livestamp="'+message.created+'" title="' + moment(message.created).calendar() + '" ></span>' +
+                                    '<span class="message-date  col-xs-2 col-md-2" data-livestamp="'+message.created+'" title="' + moment(message.created).calendar() + '" ></span>' +
                                 '</div>' +
                             '</li>';
     } else {
@@ -98,11 +98,11 @@ function makeMessageTemplate(message) {
 
         var messageString = '<li class="message-item last-message-item" id="'+message._id+'" data-author="'+message.username.replace(/\s+/g, '')+'">' +
                                 '<div class="container">' +
-                                    '<span class="message-content col-xs-9 col-xs-offset-1">' +
+                                    '<span class="message-content col-xs-8 col-md-9 col-xs-offset-2 col-md-offset-1">' +
                                         '<!--<i class="message-user-status online"></i>-->'+
                                         message.content +
                                     '</span>' +
-                                    '<span class="message-date  col-xs-2" data-livestamp="'+message.created+'" title="' + moment(message.created).calendar() + '" ></span>' +
+                                    '<span class="message-date  col-xs-2 col-md-2" data-livestamp="'+message.created+'" title="' + moment(message.created).calendar() + '" ></span>' +
                                 '</div>' +
                             '</li>';
 
