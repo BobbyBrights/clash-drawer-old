@@ -43,10 +43,8 @@ socket.on('user left', function (data) {
  */
 function populateMessages() {
     $.getJSON("/msg/all", function(msgs) {
-        var previousMSG = '';
         $.each(msgs, function(i, msg) {
-            $('#messages').append(makeMessageTemplate(msg, previousMSG));
-            previousMSG = msg;
+            $('#messages').append(makeMessageTemplate(msg));
         });
         //
         updateColumnAndMessagesDimensions();
@@ -69,10 +67,12 @@ function updateLoggedInCount() {
  * Takes a message object and returns a string for the message-item
  * @param  Chat Object *message: returned from API (Mongo Schema)
  */
-function makeMessageTemplate(message, previousMessage) {
+function makeMessageTemplate(message) {
 
-    if (previousMessage.username !== message.username){
-        var messageString = '<li class="message-item last-message-item" id="'+message._id+'">' +
+    var previousMessage = $('.message-item').last();
+
+    if (previousMessage.attr('data-author') !== message.username){
+        var messageString = '<li class="message-item last-message-item" id="'+message._id+'" data-author="'+message.username.replace(/\s+/g, '')+'">' +
                                 '<div class="container">' +
                                     '<span class="message-user col-xs-1">' + message.username.replace(/\s+/g, '') + '</span>' +
                                     '<span class="message-content col-xs-9">' +
@@ -83,9 +83,9 @@ function makeMessageTemplate(message, previousMessage) {
                                 '</div>' +
                             '</li>';
     } else {
-        $('li#'+previousMessage._id).removeClass('last-message-item');
+        $('li#'+previousMessage.attr('id')).removeClass('last-message-item');
 
-        var messageString = '<li class="message-item last-message-item" id="'+message._id+'">' +
+        var messageString = '<li class="message-item last-message-item" id="'+message._id+'" data-author="'+message.username.replace(/\s+/g, '')+'">' +
                                 '<div class="container">' +
                                     '<span class="message-content col-xs-9 col-xs-offset-1">' +
                                         '<!--<i class="message-user-status online"></i>-->'+
@@ -97,6 +97,7 @@ function makeMessageTemplate(message, previousMessage) {
 
     }
 
+    previousMessage = '';
 
     return messageString;
 }
