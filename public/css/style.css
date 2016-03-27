@@ -62,7 +62,12 @@
 .column-header-right {
     float: right;
     padding-right: 20px;
+    color: white;
 }
+
+    .column-header-right a {
+        color: white;
+    }
 
     .column-header-right .active-count,  .active-count img {
         color: white;

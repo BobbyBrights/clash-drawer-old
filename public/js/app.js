@@ -71,8 +71,6 @@ function styleOwnMessages() {
     }
 }
 
-
-
 /**
  * Takes a message object and returns a string for the message-item
  * @param  Chat Object *message: returned from API (Mongo Schema)
