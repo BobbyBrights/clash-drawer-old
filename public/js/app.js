@@ -27,15 +27,18 @@ $(function() {
 // -----------------------------------
 
 socket.on('user joined', function (data) {
-    console.log('received user joined notification');
     $.get('/activeUsers/add', function() {
-        updateLoggedInCount();
+        $.get('/user/'+currentUser.username+'/connected', function() {
+            updateLoggedInCount();
+        });
     });
 });
 
 socket.on('user left', function (data) {
     $.get('/activeUsers/remove', function() {
-        updateLoggedInCount();
+        $.get('/user/'+currentUser.username+'/disconnected', function() {
+            updateLoggedInCount();
+        });
     });
 });
 
