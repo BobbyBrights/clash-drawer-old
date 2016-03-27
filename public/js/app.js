@@ -15,6 +15,7 @@ $(function() {
 
     // Now update the Clan Info
     populateClanInfo();
+
 });
 
 // USER
@@ -42,8 +43,10 @@ socket.on('user left', function (data) {
  */
 function populateMessages() {
     $.getJSON("/msg/all", function(msgs) {
+        var previousMSG = '';
         $.each(msgs, function(i, msg) {
-            $('#messages').append(makeMessageTemplate(msg));
+            $('#messages').append(makeMessageTemplate(msg, previousMSG));
+            previousMSG = msg;
         });
         //
         updateColumnAndMessagesDimensions();
@@ -66,17 +69,34 @@ function updateLoggedInCount() {
  * Takes a message object and returns a string for the message-item
  * @param  Chat Object *message: returned from API (Mongo Schema)
  */
-function makeMessageTemplate(message) {
-    var messageString = '<li class="message-item">' +
-                            '<div class="container">' +
-                                '<span class="message-user col-xs-1">' + message.username + '</span>' +
-                                '<span class="message-content col-xs-9">' +
-                                    '<i class="message-user-status online"></i>'+
-                                    message.content +
-                                '</span>' +
-                                '<span class="message-date  col-xs-2" data-livestamp="'+message.created+'" title="' + moment(message.created).calendar() + '" ></span>' +
-                            '</div>' +
-                        '</li>';
+function makeMessageTemplate(message, previousMessage) {
+
+    if (previousMessage.username !== message.username){
+        var messageString = '<li class="message-item last-message-item" id="'+message._id+'">' +
+                                '<div class="container">' +
+                                    '<span class="message-user col-xs-1">' + message.username.replace(/\s+/g, '') + '</span>' +
+                                    '<span class="message-content col-xs-9">' +
+                                        '<!--<i class="message-user-status online"></i>-->'+
+                                        message.content +
+                                    '</span>' +
+                                    '<span class="message-date  col-xs-2" data-livestamp="'+message.created+'" title="' + moment(message.created).calendar() + '" ></span>' +
+                                '</div>' +
+                            '</li>';
+    } else {
+        $('li#'+previousMessage._id).removeClass('last-message-item');
+
+        var messageString = '<li class="message-item last-message-item" id="'+message._id+'">' +
+                                '<div class="container">' +
+                                    '<span class="message-content col-xs-9 col-xs-offset-1">' +
+                                        '<!--<i class="message-user-status online"></i>-->'+
+                                        message.content +
+                                    '</span>' +
+                                    '<span class="message-date  col-xs-2" data-livestamp="'+message.created+'" title="' + moment(message.created).calendar() + '" ></span>' +
+                                '</div>' +
+                            '</li>';
+
+    }
+
 
     return messageString;
 }

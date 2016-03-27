@@ -204,9 +204,12 @@ form input {
 }
 
 .message-item {
-    border-bottom: 1px solid #eee;
     border-left:1px solid #bbb;
     position: relative;
+}
+
+.message-item.last-message-item {
+    border-bottom: 1px solid #eee;
 }
 
 .message-item .container {
