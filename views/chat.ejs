@@ -13,50 +13,7 @@
 
 <body>
     <div class="container-fluid padding-0">
-        <div class="col-xs-3 column-1">
-            <div class="column-header">
-                <h3>Clan</h3>
-            </div>
-            <div class="clan-info">
-                <img src="/images/logo.png" class="clan-logo" alt="">
-                <h2 class="clan-name">Legacy-Clan</h2>
-                <table>
-                    <tr>
-                        <td class="dt">Tag:</td>
-                        <td id="clan-tag" class="dd"></td>
-                    </tr>
-                    <tr>
-                        <td class="dt">Members:</td>
-                        <td id="clan-members-count" class="dd"></td>
-                    </tr>
-                    <tr>
-                        <td class="dt">War Wins:</td>
-                        <td id="clan-war-wins" class="dd"></td>
-                    </tr>
-                    <tr>
-                        <td class="dt">Win Streak:</td>
-                        <td id="clan-war-win-streak" class="dd"></td>
-                    </tr>
-                </table>
-
-                <div id="clan-members-list"></div>
-            </div>
-
-        </div>
-        <div class="col-xs-9 column-2 main-chat">
-            <div class="column-header">
-                <h3>Chat <span class="small">signed in as <%= user.username %> </span></h3>
-                <div class="column-header-right">
-                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                    <span class="active-count"></span>
-                    &middot;
-                    <% if(user.username !== ''){ %>
-                        <a href="/login">Sign Out</a>
-                    <% } else { %>
-                        <a href="/logout">Sign In</a>
-                    <% } %>
-                </div>
-            </div>
+        <div class="col-xs-12 column-2 main-chat">
             <ul id="messages"></ul>
 
             <div class="container message-input">
@@ -68,11 +25,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="col-xs-2 column-3">
-            <div class="column-header">
-                <h3>Attack Plan</h3>
-            </div>
-        </div> -->
     </div>
 
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>

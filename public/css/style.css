@@ -241,7 +241,8 @@ form input {
 .message-date {
         float: right;
         color: #666;
-        padding-right: 15px;
+        padding-right: 5px;
+        font-size:70%;
         text-align: right;
 }
 .message-user-status {
