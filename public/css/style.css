@@ -208,6 +208,11 @@ form input {
     position: relative;
 }
 
+.message-item.own-message {
+    background: rgba(0,0,0,0.025);
+}
+
+
 .message-item.last-message-item {
     border-bottom: 1px solid #eee;
 }
