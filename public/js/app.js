@@ -1,5 +1,6 @@
 var socket = io();
 var clanInfo = '';
+var currentUser;
 
 $(function() {
     // On page load update the dimensions.
@@ -7,11 +8,15 @@ $(function() {
     // On window resize update the dimensions.
     $(window).resize(function() { updateColumnAndMessagesDimensions(); });
 
+
+    $.get('/activeUser', function(data) {
+        currentUser = data.user;
+    });
+
     // Now populate the messages from the Server
     // TODO: Local storage
     populateMessages();
     updateLoggedInCount();
-    styleMessages();
 
     // Now update the Clan Info
     populateClanInfo();
@@ -51,14 +56,19 @@ function populateMessages() {
     });
 }
 
-function styleMessages() {
-    return;
-}
-
 function updateLoggedInCount() {
     $.getJSON("/activeUsers", function(users) {
         $('.active-count').html(users.activeUsers.length);
     });
+}
+
+function styleOwnMessages() {
+    var username = currentUser.username;
+
+    var items = $('li.message-item[data-author='+username+']');
+    if(items){
+        items.addClass('own-message');
+    }
 }
 
 
@@ -99,6 +109,7 @@ function makeMessageTemplate(message) {
 
     previousMessage = '';
 
+    styleOwnMessages();
     return messageString;
 }
 
