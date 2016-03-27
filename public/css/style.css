@@ -50,6 +50,15 @@
     float: left;
     color: white;
 }
+
+.column-header h3 span.small {
+    font-size: 70%;
+    font-weight: lighter;
+    float: right;
+    padding-left:10px;
+    line-height:43px;
+    margin-bottom: -5px;
+}
 .column-header-right {
     float: right;
     padding-right: 20px;

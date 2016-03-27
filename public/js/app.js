@@ -3,7 +3,6 @@ var clanInfo = '';
 var connected;
 
 $(function() {
-
     // On page load update the dimensions.
     updateColumnAndMessagesDimensions();
     // On window resize update the dimensions.
@@ -17,10 +16,6 @@ $(function() {
 
     // Now update the Clan Info
     populateClanInfo();
-
-    $('.sign-in-btn').click(function() {
-        socket.emit('add user', 'gareth');
-    });
 });
 
 // USER
@@ -86,7 +81,8 @@ function makeMessageTemplate(message) {
  * A new message has been submitted
  */
 $('form').submit(function() {
-    socket.emit('chat message', $('#m').val());
+    var data = {msg: $('#m').val(), user: $('#user_local_username').val()};
+    socket.emit('chat message', data);
     $('#m').val('');
     return false;
 });
