@@ -37,7 +37,29 @@ module.exports = function(app, passport) {
         }
     });
 
+    app.get('/refresh', function(req, res) {
+        var request = require('request');
+        var jsonfile = require('jsonfile')
 
+        var apikey = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjJiOTA0MjZlLTFlMjAtNDBlNy04MDhjLWVmZDNhMWI4MDdhZiIsImlhdCI6MTQ1OTEwMjAzOSwic3ViIjoiZGV2ZWxvcGVyLzU5M2YzOGY1LWU5MGYtNDMyNi0zNzZkLWJkZDQwZWRlNTlkYyIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjgxLjEzNS40Mi4zIiwiNDYuMTAxLjMwLjIyNyJdLCJ0eXBlIjoiY2xpZW50In1dfQ.RUWR_7_1xhLp3hyE7CEp-WQGK5XuC8K4kPAhcWjKYX3uVQzOb-djZCrPOXtKf1TCQAUzc5LKV0zGmpwA3k9DGA';
+        var file = 'public/members.json'
+
+        var options = {
+          url: 'https://api.clashofclans.com/v1/clans/%238R80QQVP',
+          headers: {
+            'Authorization': 'Bearer ' + apikey,
+            'Accept': 'application/json'
+          }
+        };
+
+        request(options, function (error, response, body) {
+            jsonfile.writeFile(file, JSON.parse(body), function (err) {
+              console.error(err)
+            })
+            res.json(JSON.parse(body));
+        })
+
+    });
 
 };
 
